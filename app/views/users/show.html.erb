@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @user %>
+
+<h2>Posts by <%= @user.name %></h2>
+<ul>
+  <% @user.posts.each do |post| %>
+    <li><%= link_to post.title, post_path(post) %></li>
+  <% end %>
+</ul>
+
+<div>
+  <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <%= link_to "Back to users", users_path %>
+
+  <%= button_to "Destroy this user", @user, method: :delete %>
+</div>
