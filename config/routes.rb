@@ -4,8 +4,13 @@ Rails.application.routes.draw do
   end
   post "/graphql", to: "graphql#execute"
   resources :comments
-  resources :posts
-  resources :users
+  resources :posts do
+    resources :comments, only: [:index], controller: 'post_comments'
+  end
+  resources :users do
+    resources :posts, only: [:index], controller: 'user_posts'
+    resources :comments, only: [:index], controller: 'user_comments'
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
