@@ -23,4 +23,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "posts#index"
+
+  if Rails.env.production?
+    get '/run_migrations', to: 'application#run_migrations'
+  end
 end
