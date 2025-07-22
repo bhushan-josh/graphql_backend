@@ -26,5 +26,6 @@ Rails.application.routes.draw do
 
   if Rails.env.production?
     get '/run_migrations', to: 'application#run_migrations'
+    get '/run_seeds', to: 'application#run_seeds'
   end
 end

@@ -17,4 +17,20 @@ class ApplicationController < ActionController::Base
       head :forbidden
     end
   end
+
+  def run_seeds
+    if Rails.env.production?
+      begin
+        require 'rake'
+        Rails.application.load_tasks
+        Rake::Task['db:seed'].reenable
+        Rake::Task['db:seed'].invoke
+        render plain: "Seeding ran successfully!"
+      rescue => e
+        render plain: "Seeding failed: #{e.message}"
+      end
+    else
+      head :forbidden
+    end
+  end
 end
