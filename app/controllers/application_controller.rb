@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   def run_migrations
     if Rails.env.production?
       begin
-        ActiveRecord::Migrator.migrate(Rails.root.join("db/migrate"))
+        require 'rake'
+        Rails.application.load_tasks
+        Rake::Task['db:migrate'].invoke
         render plain: "Migrations ran successfully!"
       rescue => e
         render plain: "Migration failed: #{e.message}"
