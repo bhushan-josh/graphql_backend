@@ -20,7 +20,7 @@ RUN bundle install
 COPY . .
 
 # Precompile assets
-RUN bundle exec rake assets:precompile
+RUN bundle install
 
 # Expose port
 EXPOSE 3000
